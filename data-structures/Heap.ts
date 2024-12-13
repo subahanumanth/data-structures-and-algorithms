@@ -48,9 +48,7 @@ class PriorityQueue {
     let index = this.heap.length - 1;
     while (
       this.hasParent(index) &&
-      (this.heap[this.getParentIndex(index)][0] > this.heap[index][0] ||
-        (this.heap[this.getParentIndex(index)][0] == this.heap[index][0] &&
-          this.heap[this.getParentIndex(index)][1] > this.heap[index][1]))
+      this.heap[this.getParentIndex(index)] > this.heap[index]
     ) {
       this.swap(this.getParentIndex(index), index);
       index = this.getParentIndex(index);
@@ -64,17 +62,13 @@ class PriorityQueue {
       smallerIndex = this.getLeftIndex(index);
       if (
         this.hasRightChild(index) &&
-        this.heap[this.getRightIndex(index)][0] <
-          this.heap[this.getLeftIndex(index)][0]
+        this.heap[this.getRightIndex(index)] <
+          this.heap[this.getLeftIndex(index)]
       ) {
         smallerIndex = this.getRightIndex(index);
       }
 
-      if (
-        this.heap[index][0] < this.heap[smallerIndex][0] ||
-        (this.heap[index][0] == this.heap[smallerIndex][0] &&
-          this.heap[index][1] < this.heap[smallerIndex][1])
-      ) {
+      if (this.heap[index][0] < this.heap[smallerIndex][0]) {
         break;
       } else {
         this.swap(index, smallerIndex);
